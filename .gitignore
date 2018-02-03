@@ -6,7 +6,6 @@
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea/misc.xml
-.idea/transcript_selenium_spider.iml
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
