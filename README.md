@@ -16,7 +16,7 @@ start_bot = False
 
 telegram_bot_token = 'TOKEN'
 
-# Send '/start' to the bot in telegram to get your user id, user id example: 12345678
-self_user_id = YOUR TELEGRAM USER ID  
+# Send '/start' to the bot in telegram to get your user id
+self_user_id = 12345678  
 ```
 2. Run spider.py
