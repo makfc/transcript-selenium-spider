@@ -124,6 +124,9 @@ def init():
     if glob.glob("*.pdf"):
         logger.error('Please delete all pdf file first! (except the pdf under old_transcript)')
         exit()
+    if config.start_bot:
+        telegram_bot.main()
+
     old_transcript_md5 = transcript.get_old_transcript_md5()
     web_driver_setup()
 
@@ -165,6 +168,5 @@ def main():
 
 
 if __name__ == "__main__":
-    telegram_bot.main()
     init()
     main()
