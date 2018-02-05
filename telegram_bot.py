@@ -10,6 +10,7 @@ bot = None
 logger = logging.getLogger(__name__)
 
 LIST_CHAT_FILE_NAME = 'list_chat.pkl'
+MESSAGE_TO_SEND = '出左成績\nhttps://swsdownload.vtc.edu.hk/swsdownload/'
 list_chat = []
 if os.path.exists(LIST_CHAT_FILE_NAME):
     list_chat = pickle.load(open(LIST_CHAT_FILE_NAME, "rb"))
@@ -17,17 +18,19 @@ if os.path.exists(LIST_CHAT_FILE_NAME):
 
 def start(bot, update):
     if update.message.from_user.id == config.self_user_id:
-        if any(x.id == update.message.chat.id for x in list_chat):
+        if update.message.chat in list_chat:
             update.message.reply_text('You have already subscribed before!')
         else:
             list_chat.append(update.message.chat)
             pickle.dump(list_chat, open(LIST_CHAT_FILE_NAME, "wb"))
             update.message.reply_text('Subscribe successful!')
+    elif update.message.chat.type == 'private':
+        update.message.reply_text('You user id (for self_user_id in config.py): {}'.format(update.message.from_user.id))
 
 
 def unsub(bot, update):
     if update.message.from_user.id == config.self_user_id:
-        if any(x.id == update.message.chat.id for x in list_chat):
+        if update.message.chat in list_chat:
             list_chat.remove(update.message.chat)
             pickle.dump(list_chat, open(LIST_CHAT_FILE_NAME, "wb"))
             update.message.reply_text('Unsubscribe successful!')
@@ -41,17 +44,17 @@ def error(bot, update, error):
 
 
 def send_to_me(file_name):
-    bot.send_message(config.self_user_id, '出左成績\nhttps://swsdownload.vtc.edu.hk/swsdownload/')
+    bot.send_message(config.self_user_id, MESSAGE_TO_SEND)
     bot.send_document(config.self_user_id, document=open(file_name, 'rb'))
     logger.info("send_to_me completed")
 
 
 def send_to_all_groups():
     for chat in list_chat:
-        # same as bot.send_message(chat_id, '出左成績\nhttps://swsdownload.vtc.edu.hk/swsdownload/')
+        # same as bot.send_message(chat_id, MESSAGE_TO_SEND)
         t = threading.Thread(target=bot.send_message,
                              args=(chat.id,
-                                   '出左成績\nhttps://swsdownload.vtc.edu.hk/swsdownload/'),
+                                   MESSAGE_TO_SEND),
                              kwargs={})
         t.start()
         logger.info("send to chat_id: %s", chat.id)

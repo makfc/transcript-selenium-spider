@@ -5,7 +5,7 @@
 student_id = 'YOUR STUDENT ID'
 password = 'YOUR PASSWORD'
 
-# No browser window is being displayed when True
+# The browser window will not be displayed when True
 headless = False  # True or False
 
 # Check interval(second)
