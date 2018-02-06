@@ -49,8 +49,7 @@ def web_driver_setup():
     if config.headless:
         chrome_options.add_argument('headless')
 
-    chrome_driver = "./chromedriver.exe"
-    driver = webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
+    driver = webdriver.Chrome(chrome_options=chrome_options)
 
     if config.headless:
         enable_download_in_headless_chrome(driver, download_dir)
