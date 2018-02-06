@@ -1,6 +1,8 @@
 # transcript_selenium_spider
 ### Usage
-1. Create config.py
+1. If you are not using Windows, download the chromedriver from <https://sites.google.com/a/chromium.org/chromedriver/downloads> and place it to this directory
+
+2. Create config.py
 ```
 student_id = 'YOUR STUDENT ID'
 password = 'YOUR PASSWORD'
@@ -20,4 +22,4 @@ telegram_bot_token = 'TOKEN'
 # Send '/start' to the bot in telegram to get your user id
 self_user_id = 12345678  
 ```
-2. Run spider.py
+3. Run spider.py
