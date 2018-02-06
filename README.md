@@ -14,6 +14,7 @@ interval = 60 * 5
 # Start the telegram bot when True
 start_bot = False
 
+# Start a conversation with the @BotFather and create a bot using the "/newbot" command
 telegram_bot_token = 'TOKEN'
 
 # Send '/start' to the bot in telegram to get your user id
