@@ -1,6 +1,6 @@
 # transcript_selenium_spider
 ### Usage
-1. If you are not using Windows, download the chromedriver from <https://sites.google.com/a/chromium.org/chromedriver/downloads> and place it to this directory
+1. If you are not using Windows, download the chromedriver from <https://sites.google.com/a/chromium.org/chromedriver/downloads> and place it to project directory
 
 2. Create config.py
 ```

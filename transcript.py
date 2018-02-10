@@ -44,6 +44,8 @@ def is_different_transcript(old_transcript_md5):
             logger.info('old_transcript_md5: %s', old_transcript_md5)
             logger.info('new_transcript_md5: %s', new_transcript_md5)
             return True
+    else:
+        logger.error('Transcript download failed')
     return False
 
 

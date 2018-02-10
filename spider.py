@@ -2,7 +2,6 @@ import glob
 import pickle
 import threading
 
-
 import transcript
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,7 +14,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 import logging
 import telegram_bot
-
 
 logging.basicConfig(format='%(asctime)s - %(name)12s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -117,6 +115,12 @@ def download_transcript():
     driver.find_element_by_css_selector(css_selector).click()
 
 
+def wait_until_download_complete(interval=1, timeout=10):
+    start = time.time()
+    while not transcript.check_for_files("*.pdf") and time.time() - start < timeout:
+        time.sleep(interval)
+
+
 def init():
     global old_transcript_md5
 
@@ -131,19 +135,17 @@ def init():
 
 
 def main():
-    global old_transcript_md5
+    global old_transcript_md5, file_name
 
     try:
         login()
         download_transcript()
+
+        wait_until_download_complete()
+
+        file_name = glob.glob("*.pdf")[0]  # get the transcript file name
     except Exception as error:
         logger.error(str(error))
-
-    # wait for download complete
-    while not transcript.check_for_files("*.pdf"):
-        time.sleep(1)
-
-    file_name = glob.glob("*.pdf")[0]  # get the transcript file name
 
     # if old transcript in old_transcript folder
     if old_transcript_md5:
