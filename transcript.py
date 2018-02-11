@@ -3,6 +3,7 @@ import hashlib
 import io
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -32,20 +33,21 @@ def is_different_transcript(old_transcript_md5):
     files = glob.glob("*.pdf")
     if files:
         file = files[0]
-        new_transcript_md5 = md5sum(file)
-        logger.info('New transcript fileName: %s', file)
-        logger.info('Hash: %s', new_transcript_md5)
+        if os.path.getsize(file) > 102400:
+            new_transcript_md5 = md5sum(file)
+            logger.info('New transcript fileName: %s', file)
+            logger.info('Hash: %s', new_transcript_md5)
 
-        # if new_transcript_md5 is None or two md5 are same
-        if not new_transcript_md5 or new_transcript_md5 == old_transcript_md5:
-            remove_all_new_transcript()
-            return False
-        else:
-            logger.info('old_transcript_md5: %s', old_transcript_md5)
-            logger.info('new_transcript_md5: %s', new_transcript_md5)
-            return True
-    else:
-        logger.error('Transcript download failed')
+            # if new_transcript_md5 is None or two md5 are same
+            if not new_transcript_md5 or new_transcript_md5 == old_transcript_md5:
+                logger.info('Same MD5')
+                remove_all_new_transcript()
+                return False
+            else:
+                logger.info('old_transcript_md5: %s', old_transcript_md5)
+                logger.info('new_transcript_md5: %s', new_transcript_md5)
+                return True
+    logger.error('Transcript download failed')
     return False
 
 

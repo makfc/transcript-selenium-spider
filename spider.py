@@ -153,7 +153,7 @@ def main():
             telegram_bot.send_message_async(file_name)
             os.startfile(file_name)
             logger.info('Transcript released!')
-            driver.quit()
+            # driver.quit()
         else:
             threading.Timer(config.interval, main).start()
             logger.info('-' * 50)
