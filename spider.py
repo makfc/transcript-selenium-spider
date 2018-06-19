@@ -48,6 +48,7 @@ def web_driver_setup():
         chrome_options.add_argument('headless')
 
     driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver.set_page_load_timeout(2)
 
     if config.headless:
         enable_download_in_headless_chrome(driver, download_dir)
@@ -82,12 +83,19 @@ def check_exists_by_id(id):
 
 def login():
     url = "https://swsdownload.vtc.edu.hk/swsdownload/"
-    driver.get(url)
+    try:
+        driver.get(url)
+    except:
+        print("Page load Timeout Occured!")
+
     if os.path.exists(COOKIES_FILE_NAME):
         cookies = pickle.load(open(COOKIES_FILE_NAME, "rb"))
         for cookie in cookies:
             driver.add_cookie(cookie)
-        driver.get(url)
+        try:
+            driver.get(url)
+        except:
+            print("Page load Timeout Occured!")
 
     logger.info('Check auth...')
     if check_exists_by_xpath('//*[@data-loginstatus="login"]'):
