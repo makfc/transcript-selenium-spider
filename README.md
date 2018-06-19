@@ -23,3 +23,6 @@ telegram_bot_token = 'TOKEN'
 self_user_id = 12345678  
 ```
 3. Run spider.py
+
+# Disclaimer
+transcript_selenium_spider is intended for academic purposes. Use at your own risk.
