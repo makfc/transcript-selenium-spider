@@ -44,6 +44,8 @@ def web_driver_setup():
     prefs = {"download.default_directory": download_dir}
     chrome_options.add_experimental_option("prefs", prefs)
 
+    # chrome_options.add_argument(r'user-data-dir=C:/Users/makfc/AppData/Local/Google/Chrome/User Data')
+
     if config.headless:
         chrome_options.add_argument('headless')
 
