@@ -1,4 +1,4 @@
-# transcript_selenium_spider
+# transcript-selenium-spider
 ### Usage
 1. If you are not using Windows, download the chromedriver from <https://sites.google.com/a/chromium.org/chromedriver/downloads> and place it to project directory
 
