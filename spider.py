@@ -26,7 +26,6 @@ wait = None
 COOKIES_FILE_NAME = 'cookies.pkl'
 old_transcript_md5 = None
 
-
 def enable_download_in_headless_chrome(driver, download_dir):
     # add missing support for chrome "send_command"  to selenium webdriver
     driver.command_executor._commands["send_command"] = ("POST", '/session/$sessionId/chromium/send_command')

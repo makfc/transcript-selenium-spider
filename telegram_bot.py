@@ -17,7 +17,7 @@ if os.path.exists(LIST_CHAT_FILE_NAME):
 
 
 def start(bot, update):
-    if update.message.from_user.id == config.self_user_id:
+    if update.message.from_user.id == config.my_user_id:
         if update.message.chat in list_chat:
             update.message.reply_text('You have already subscribed before!')
         else:
@@ -25,11 +25,11 @@ def start(bot, update):
             pickle.dump(list_chat, open(LIST_CHAT_FILE_NAME, "wb"))
             update.message.reply_text('Subscribe successful!')
     elif update.message.chat.type == 'private':
-        update.message.reply_text('You user id (for self_user_id in config.py): {}'.format(update.message.from_user.id))
+        update.message.reply_text('You user id (for my_user_id in config.py): {}'.format(update.message.from_user.id))
 
 
 def unsub(bot, update):
-    if update.message.from_user.id == config.self_user_id:
+    if update.message.from_user.id == config.my_user_id:
         if update.message.chat in list_chat:
             list_chat.remove(update.message.chat)
             pickle.dump(list_chat, open(LIST_CHAT_FILE_NAME, "wb"))
@@ -44,8 +44,8 @@ def error(bot, update, error):
 
 
 def send_to_me(file_name):
-    bot.send_message(config.self_user_id, MESSAGE_TO_SEND)
-    bot.send_document(config.self_user_id, document=open(file_name, 'rb'))
+    bot.send_message(config.my_user_id, MESSAGE_TO_SEND)
+    bot.send_document(config.my_user_id, document=open(file_name, 'rb'))
     logger.info("send_to_me completed")
 
 
