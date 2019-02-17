@@ -2,7 +2,7 @@
 ### Usage
 1. If you are not using Windows, download the chromedriver from <https://sites.google.com/a/chromium.org/chromedriver/downloads> and place it to project directory
 
-2. Create config.py
+2. Create config.py project directory
 ```
 student_id = 'YOUR STUDENT ID'
 password = 'YOUR PASSWORD'
